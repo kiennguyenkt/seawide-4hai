@@ -1,3 +1,25 @@
 node_modules/
+.vite/
 dist/
+stats.html
+build/
+*.tsbuildinfo
 .DS_Store
+
+*.pyc
+__pycache__/
+venv/
+.venv/
+*.egg-info/
+.idea/
+
+.tmp/
+env.*
+*.env.*
+.playwright-mcp/
+
+# Dump dev cho FE. Gitignore vì đây là data "chưa chốt" mỗi lần crawl.
+public/sea-live-dev.json
+
+# Output của `npm run loc` (scripts/loc.mjs), sinh lại mỗi lần chạy.
+scripts/loc-report.md
