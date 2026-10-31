@@ -1,0 +1,180 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 17px;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #ffffff;
+  border: 1px solid #d8dfe3;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #7b8d98;
+  max-width: 320px;
+  flex: 1;
+}
+
+.search input {
+  background: none;
+  border: 0;
+  outline: none;
+  color: #2a3740;
+  width: 100%;
+  font-size: 11px;
+}
+
+.search input::placeholder {
+  color: #93a3ad;
+}
+
+.searchResults {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #d8dfe3;
+  border-radius: 6px;
+  z-index: 30;
+  box-shadow: 0 8px 25px rgba(25, 42, 52, 0.12);
+  padding: 5px;
+}
+
+.searchResults button {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  color: #0d8a65;
+}
+
+.searchResults button:hover {
+  background: #eff4f5;
+}
+
+.searchResults span {
+  color: #4e616c;
+  font-size: 11px;
+}
+
+.emptyResult {
+  padding: 14px;
+}
+
+/* Cụm phải của toolbar: margin-left:auto đặt ở wrapper (không phải .showAll)
+   để icon bỏ filter dính sát trái toggle thay vì bị auto margin đẩy xa. */
+.toolbarRight {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Icon bỏ filter — cùng khung viền với nút Toàn cảnh, chỉ icon không chữ. */
+.resetFilter {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d5dcdf;
+  padding: 9px;
+  border-radius: 6px;
+}
+
+.showAll {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  color: #5d707b;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.showAll input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.switch {
+  width: 30px;
+  height: 17px;
+  border-radius: 12px;
+  background: #ccd6dc;
+  position: relative;
+}
+
+.switch:after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.showAll input:checked + .switch {
+  background: #17a67c;
+}
+
+.showAll input:checked + .switch:after {
+  left: 16px;
+  background: #ffffff;
+}
+
+.showAll input:focus-visible + .switch {
+  outline: 2px solid #0f9d76;
+}
+
+.fit {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #d5dcdf;
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .toolbar {
+    gap: 8px;
+  }
+
+  .fit {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .showAll {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  .toolbar {
+    flex-wrap: wrap;
+  }
+
+  .search {
+    max-width: none;
+  }
+
+  .showAll {
+    gap: 5px;
+  }
+
+  .showAll > svg {
+    display: none;
+  }
+}

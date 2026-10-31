@@ -1,0 +1,45 @@
+.mapCanvas {
+  position: relative;
+  flex: 1;
+  min-height: 320px;
+  overflow: hidden;
+  border: 1px solid #f0ebdd;
+  border-radius: 9px;
+  /* Trắng nhạt — mặc định khớp canvasBg trong stores/debug (picker debug
+     ở DEV ghi đè bằng inline style). */
+  background: #fefdfa;
+}
+
+.zoomLabel {
+  position: absolute;
+  left: 55px;
+  bottom: 21px;
+  color: #7d8f9a;
+  font-size: 10px;
+  pointer-events: none;
+}
+
+/* Watermark guild góc dưới-phải: mờ, thuần trang trí — pointer-events none để
+   không cản tương tác map, đứng tránh Controls + zoomLabel (cụm góc dưới-trái). */
+.watermark {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  z-index: 5;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: rgba(45, 62, 75, 0.14);
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 760px) {
+  /* .mainContent mobile cao theo nội dung nên flex: 1 không còn chiều cao
+     để chia — canvas tự giữ khung. Vuông: map ngang ~3:2 fit theo bề rộng,
+     cao hơn nữa chỉ thừa nền trống. */
+  .mapCanvas {
+    flex: none;
+    aspect-ratio: 1;
+  }
+}

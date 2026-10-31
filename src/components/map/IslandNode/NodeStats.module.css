@@ -1,0 +1,84 @@
+.nodeStats {
+  position: absolute;
+  top: 101px;
+  left: 0;
+  width: 170px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid #d8dfe3;
+  border-radius: 7px;
+  box-shadow: 0 8px 20px rgba(25, 42, 52, 0.12);
+  padding: 9px 11px;
+  z-index: 20;
+  font-size: 10px;
+}
+
+.nodeStats.pinned {
+  border-color: var(--highlight-green);
+}
+
+/* Nền popup pha nhạt màu phe đại diện (--tint): phe đang giữ đảo. Bar điểm
+   nền đục riêng nên tint chỉ lộ quanh viền/padding — chữ vẫn đọc được. */
+.nodeStats.tinted {
+  background: color-mix(in srgb, var(--tint) 45%, #ffffff);
+}
+
+/* Đảo chưa chủ có candidate đủ ngưỡng claim: sọc chéo 45deg màu candidate thay
+   nền đặc — tín hiệu "đang tranh chấp, chưa chốt" đọc khác hẳn tint đặc của
+   đảo có chủ. Sọc 35% pha trắng, chu kỳ 30px (7px trắng, phai dần sang sọc,
+   10px sọc đặc) để số điểm và bar không bị wash; băng đủ dày hạn chế moiré
+   khi popup thu nhỏ lúc zoom. */
+.nodeStats.claimable {
+  background: repeating-linear-gradient(45deg,
+      #ffffff 0 7px,
+      color-mix(in srgb, var(--tint) 35%, #ffffff) 20px 30px);
+}
+
+.statTitle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  border-bottom: 1px solid #e4e9eb;
+  padding-bottom: 7px;
+  margin-bottom: 6px;
+  color: #2c3941;
+}
+
+.statScore {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #2c3941;
+}
+
+.statName {
+  overflow: hidden;
+  color: #2c3941;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statNote {
+  flex-shrink: 0;
+  font-size: 9px;
+  color: #8a9aa5;
+  white-space: nowrap;
+}
+
+.pinToggle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: 2px;
+  border-radius: 4px;
+  color: #8a9aa5;
+}
+
+.pinToggle:hover {
+  background: #eff3f4;
+  color: #33424c;
+}
+
+.pinToggle.pinActive {
+  color: var(--highlight-green);
+}

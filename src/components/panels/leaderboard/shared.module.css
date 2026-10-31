@@ -1,0 +1,184 @@
+/* Primitive dùng chung cả 3 board: dòng accordion (item/summary/rank), khối
+   allocation khi mở, label tên phe/đảo (factionName) và row điểm đơn giản
+   (guildRow). `.ranking h2/p` bọc ngoài vẫn áp vào h2/p ở đây qua DOM. */
+.item {
+  display: block;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 0;
+  border-bottom: 1px solid #eaeef0;
+  font-size: 11px;
+  cursor: pointer;
+  list-style: none;
+}
+
+/* Row tô màu phe (inline style qua tintStyle): Tab Cứ điểm = phe đang chiếm,
+   Tab Phe = phe dẫn đầu. Viền trong suốt cho row không tô để thẳng hàng. */
+.tintedSummary {
+  padding-left: 6px;
+  padding-right: 6px;
+  border-left: 3px solid transparent;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.rank {
+  font-size: 10px;
+  color: #8496a1;
+  min-width: 17px;
+}
+
+.summary > b {
+  font-size: 10px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.allocation {
+  padding: 8px 10px;
+  background: #eff2f4;
+  border-radius: 5px;
+  max-height: 225px;
+  overflow: auto;
+}
+
+/* Biến thể cho khối guild tab Phe: khi expand guild cần thấy ~15 member cùng
+   lúc, giữ max-height 225px của .allocation là bị cuộn chỉ thấy 6-8 dòng. */
+.allocationTall {
+  max-height: 440px;
+}
+
+.allocation button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 2px;
+  font-size: 10px;
+  color: #5d707b;
+}
+
+.allocation button:hover {
+  color: #0d8a65;
+}
+
+.allocation b {
+  font-weight: 400;
+}
+
+.item[open] .summary > svg {
+  transform: rotate(90deg);
+}
+
+.factionName {
+  flex: 1;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.factionName small {
+  display: block;
+  font-size: 9px;
+  margin-top: 1px;
+}
+
+.guildRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 2px;
+  font-size: 10px;
+  color: #5d707b;
+}
+
+.guildRow span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.guildRow small {
+  color: #8496a1;
+}
+
+.guildRow b {
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Khối BXH player trong expand tab Cứ điểm — tách khỏi bảng điểm 4 phe. */
+.playerBlock {
+  margin-top: 8px;
+  border-top: 1px solid #dfe5e8;
+}
+
+/* Checkbox sort dùng chung (Tab Phe, Tab Cứ điểm). */
+.sortBar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+.sortOption {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  color: #8b9aa4;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Nút sort 3 trạng thái (Tab Cứ điểm): đang sort thì tô màu nhấn. */
+.sortActive {
+  color: #0d8a65;
+  font-weight: 500;
+}
+
+.sortOption input {
+  margin: 0;
+  accent-color: #0d8a65;
+}
+
+/* Pill filter dùng chung (sub-tab Tab Phe, filter phe Tab Cứ điểm). */
+.subTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.subTabs button {
+  padding: 4px 9px;
+  border-radius: 20px;
+  background: #eff2f4;
+  color: #7d8f9a;
+  font-size: 10px;
+}
+
+.subTabs button.selected {
+  background: #0d8a65;
+  color: #fff;
+}
+
+/* Pill phe: text + tint theo labelColor (inline var), selected = viền đậm. */
+.subTabs button.factionPill {
+  color: var(--label);
+  background: color-mix(in srgb, var(--label) 9%, transparent);
+  font-weight: 500;
+}
+
+.subTabs button.factionPill.selected {
+  color: var(--label);
+  background: color-mix(in srgb, var(--label) 18%, transparent);
+  box-shadow: inset 0 0 0 1px var(--label);
+}
+
+.topShare {
+  font-weight: 500;
+}

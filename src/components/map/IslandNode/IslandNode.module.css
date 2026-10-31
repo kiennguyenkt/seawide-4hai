@@ -1,0 +1,148 @@
+.island {
+  width: 140px;
+  height: 85px;
+  text-align: center;
+  position: relative;
+  /* React Flow tắt pointer-events trên node wrapper (nodesDraggable/elementsSelectable = false);
+     bật lại để hover hiện popup điểm và các nút bấm được */
+  pointer-events: auto;
+  transition: opacity 0.2s;
+  --faction: #9caeb9;
+  /* --icon-box được set inline từ iconBoxSize() (nguồn duy nhất). */
+}
+
+/* Node trung lập (owner: null): mờ nhẹ mặc định để toàn cảnh đỡ rối (opacity
+   chỉnh từ picker debug qua --neutral-opacity), tự un-dim khi hover/focus.
+   Filter dim (.dim) vẫn phải thắng hover. */
+.neutral {
+  opacity: var(--neutral-opacity, 0.4);
+}
+
+.neutral:hover,
+.neutral:focus-within {
+  opacity: 1;
+}
+
+/* Đảo chưa chủ có đóng góp khớp filter guild/player (.hot) không hưởng dim
+   neutral nền — đang có giao tranh phải nổi như đảo có chủ, popup điểm giữ
+   nguyên độ rõ khi showAll (không cần hover). */
+.neutral.hot {
+  opacity: 1;
+}
+
+.dim {
+  opacity: 0.2;
+}
+
+.dim:hover {
+  opacity: 0.2;
+}
+
+/* Node khớp filter guild/player: viền icon dày lên rõ (thường 2px → 3.5px,
+   base 3px → 4.5px), kết hợp dim node lạ + edge mờ để cụm được lọc nổi khỏi
+   toàn cảnh. */
+.hot .islandIcon {
+  border-width: 3.5px;
+}
+
+.hot.base .islandIcon {
+  border-width: 4.5px;
+}
+
+.islandIcon {
+  display: grid;
+  place-items: center;
+  margin: auto;
+  width: var(--icon-box, 55px);
+  height: var(--icon-box, 55px);
+  background: #ffffff;
+  border: 2px solid var(--faction);
+  color: var(--faction);
+  border-radius: 18px;
+  /* Căn tâm kim cương vào đúng tâm hộp node (= tọa độ data). Dùng transform
+     thay vì margin-top: margin của con đầu tiên bị collapse ra ngoài .island,
+     làm React Flow đo chiều cao node bị phình và lệch tâm anchor. */
+  transform: translateY(calc(42.5px - var(--icon-box, 55px) / 2)) rotate(45deg);
+  box-shadow:
+    0 0 0 5px rgba(130, 148, 160, 0.14),
+    0 6px 18px color-mix(in srgb, var(--faction) 22%, transparent);
+}
+
+.islandIcon svg {
+  transform: rotate(-45deg);
+}
+
+.islandIcon:hover,
+.active .islandIcon {
+  background: color-mix(in srgb, var(--faction) 12%, #ffffff);
+  box-shadow:
+    0 0 0 6px color-mix(in srgb, var(--faction) 22%, transparent),
+    0 6px 18px color-mix(in srgb, var(--faction) 32%, transparent);
+}
+
+.islandLabel {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #33424c;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.labelWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.islandLabel span {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.pin {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 2px;
+  display: grid;
+  place-items: center;
+  padding: 3px;
+  color: #8a9aa5;
+}
+
+.pin.pinned {
+  color: var(--highlight-green);
+}
+
+.base .islandIcon {
+  border-radius: 18px;
+  border-width: 3px;
+}
+
+.base .islandLabel {
+  color: var(--faction);
+  /* Tên căn cứ in-game — cỡ x2 nhãn đảo thường để nổi bật toàn cảnh. */
+  font-size: 28px;
+}
+
+/* Debug: dấu tâm node — nằm ở 50%/50% hộp, trùng với điểm neo edge. */
+.centerDot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px;
+  border-radius: 50%;
+  background: #e5484d;
+  box-shadow: 0 0 0 1.5px #ffffff;
+  z-index: 40;
+  pointer-events: none;
+}
