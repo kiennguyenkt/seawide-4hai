@@ -1,0 +1,60 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  /* height xác định (không phải min-height): khung app luôn đúng viewport,
+     BXH expand dài cỡ nào cũng chỉ scroll trong cột phải chứ không đẩy chiều
+     cao app. Màn thấp hơn sàn 560px của workspace thì workspace giữ sàn và
+     page tự cuộn (footer tràn xuống dưới fold). */
+  height: 100dvh;
+}
+
+/* Cao bằng phần còn lại của viewport sau header + footer (flex: 1); màn thấp
+   thì giữ sàn 560px. Con của nó phải tự scroll — không được bước ra ngoài. */
+.workspace {
+  display: flex;
+  flex: 1;
+  min-height: 560px;
+}
+
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 27px 25px 0;
+}
+
+@media (min-width: 1600px) {
+  .mainContent {
+    padding: 32px 32px 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .mainContent {
+    padding: 22px 16px 0;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Mobile: sidebar xếp dưới map, cao theo nội dung (không scroll riêng) —
+     khung app phải giãn theo, nếu giữ height cố định thì footer kẹt ở đáy
+     viewport và đè lên BXH. */
+  .app {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .workspace {
+    min-height: 520px;
+    flex-wrap: wrap;
+  }
+
+  /* Cao theo nội dung — height cố định cũ làm legend + thanh Lịch sử tràn
+     xuống đè tab sidebar; chiều cao map do .mapCanvas tự giữ. */
+  .mainContent {
+    width: 100%;
+    flex-basis: 100%;
+    padding: 20px 13px 0;
+  }
+}

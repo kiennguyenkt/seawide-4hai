@@ -1,0 +1,87 @@
+/* Picker màu (dev-only) — chip con của debug group;
+   position relative để popover neo vào chip. */
+.bgPicker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #8a9aa5;
+  border: 1px solid #e3eaee;
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bgPicker input {
+  width: 24px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Swatch mở picker — hiển thị màu hiện tại theo opacity. */
+.swatch {
+  width: 24px;
+  height: 18px;
+  border: 1px solid #c9d4da;
+  border-radius: 4px;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Popover picker alpha (react-colorful) — neo góc phải chip. */
+.pickerPop {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  background: #ffffff;
+  border: 1px solid #d8dfe3;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(45, 62, 75, 0.16);
+  cursor: default;
+}
+
+@media (max-width: 1100px) {
+  /* Màn hẹp: cụm debug rớt xuống hàng riêng sát mép trái viewport — neo phải
+     đẩy popover (rộng ~226px) tràn qua mép trái, mất vùng chọn màu. Neo góc
+     trái chip thì popover trải sang phải, lọt hết trong màn. */
+  .pickerPop {
+    right: auto;
+    left: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Siêu hẹp: chip "Đảo" lệch phải hơn (sau chip "Nền") — popover 226px vẫn
+     tràn phải vài px. Thu picker xuống 180px (pointer của react-colorful
+     tính theo % nên co giãn an toàn). */
+  .pickerPop :global(.react-colorful) {
+    width: 180px;
+  }
+}
+
+/* Mã hex dưới picker — override rule `.bgPicker input` của swatch. */
+.pickerPop .hexValue {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  padding: 4px 6px;
+  border: 1px solid #d8dfe3;
+  border-radius: 4px;
+  background: #f6f9fa;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 12px;
+  color: #2d3e4b;
+  text-align: center;
+  cursor: text;
+}

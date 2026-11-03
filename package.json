@@ -1,0 +1,36 @@
+{
+  "name": "sea-union",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.15.1",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "build:analyze": "tsc --noEmit && vite build --mode analyze",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test \"src/**/*.test.ts\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "loc": "node scripts/loc.mjs",
+    "cleanup": "bash -c \"bash ./scripts/cleanup-deploy-branch.sh && rm -rf scripts || echo 'cleanup failed'\""
+  },
+  "dependencies": {
+    "@xyflow/react": "^12.9.0",
+    "lucide-react": "^1.65.0",
+    "react": "^19.2.0",
+    "react-colorful": "^5.8.1",
+    "react-dom": "^19.2.0",
+    "zustand": "^5.0.16"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "prettier": "^3.9.10",
+    "rollup-plugin-visualizer": "^7.1.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^7.1.0"
+  }
+}

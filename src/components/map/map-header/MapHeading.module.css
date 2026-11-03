@@ -1,0 +1,116 @@
+.mapHeading {
+  margin-bottom: 21px;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  color: #7b8d98;
+  font-weight: 600;
+}
+
+.title {
+  margin-top: 8px;
+  font-size: 24px;
+  letter-spacing: -0.7px;
+  font-weight: 600;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+/* Dòng riêng dưới title: server switcher bên trái, đồng hồ event sát phải.
+   Dải server dài (10+ cụm) → wrap, đồng hồ rớt xuống cuối. */
+.serverRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 10px;
+}
+
+.headingMeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.debugToggle {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #8a9aa5;
+  border: 1px solid #d8dfe3;
+  background: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Khung chung cả cụm debug (picker nền canvas, picker trung lập, nút debug
+   tâm node) — dev-only, cả cụm bị loại khỏi bundle prod. */
+.debugGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #cfd9de;
+  background: transparent;
+  padding: 5px 9px;
+  border-radius: 7px;
+}
+
+.debugToggle:hover {
+  color: #33424c;
+  border-color: #b9c5cc;
+}
+
+.debugToggle.debugOn,
+.debugToggle.debugOn:hover {
+  color: #e5484d;
+  border-color: #e5484d;
+  background: #fdf1f1;
+}
+
+@media (max-width: 1100px) {
+  /* Cụm debug không lọt chung hàng với title → rớt xuống dưới dòng server +
+     đồng hồ thay vì đẩy page tràn ngang / đè sidebar (tablet: cột map chỉ còn
+     ~420px). topRow tan ra để headingMeta xếp sau serverRow. */
+  .mapHeading {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .topRow {
+    display: contents;
+  }
+
+  .headingMeta {
+    order: 1;
+    margin-top: 12px;
+  }
+
+  /* Prod chưa mở easter egg: không có cụm debug → khỏi chừa khoảng trống. */
+  .headingMeta:empty {
+    display: none;
+  }
+
+  .headingMeta,
+  .debugGroup {
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .mapHeading {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 21px;
+  }
+}

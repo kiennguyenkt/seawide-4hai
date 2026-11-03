@@ -1,0 +1,39 @@
+/* Cột map hẹp (tablet: sidebar chiếm chỗ) → wrap thay vì bị sidebar che. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+
+.entry {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.entry i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+@media (max-width: 1100px) {
+  .legend {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Tên phe dài, màn hẹp không đủ 1 hàng → wrap thay vì tràn ngang. */
+  .legend {
+    width: 100%;
+    gap: 4px 10px;
+    font-size: 9px;
+  }
+}
